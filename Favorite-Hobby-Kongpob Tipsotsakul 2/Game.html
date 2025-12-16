@@ -26,6 +26,211 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CS2 Quiz Styles */
+        .quiz-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+            margin: 0 -1.5rem;
+            padding: 4rem 1.5rem;
+        }
+        
+        /* Add smooth transitions for quiz elements */
+        #quiz-intro, #quiz-content, #quiz-results {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        #quiz-content, #quiz-results {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        #quiz-content:not([style*="display: none"]), #quiz-results:not([style*="display: none"]) {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+        
+        #quiz-intro {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        #quiz-intro p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-start-btn, .quiz-restart-btn {
+            background: var(--accent-primary);
+            color: #000;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid var(--accent-primary);
+        }
+        
+        .quiz-start-btn:hover, .quiz-restart-btn:hover {
+            background: transparent;
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+        
+        .quiz-progress {
+            margin-bottom: 2rem;
+        }
+        
+        #question-number {
+            font-family: var(--font-mono);
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent-primary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-text {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--accent-primary);
+        }
+        
+        .quiz-option input[type="radio"] {
+            margin-top: 0.25rem;
+        }
+        
+        .quiz-option label {
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .quiz-option input[type="radio"]:checked + label {
+            color: var(--accent-primary);
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        
+        .quiz-nav-btn, .quiz-submit-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .quiz-nav-btn:hover, .quiz-submit-btn:hover {
+            background: var(--accent-primary);
+            color: #000;
+            border-color: var(--accent-primary);
+        }
+        
+        .quiz-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quiz-results {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .results-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .score-display {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .result-message {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 1.5rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+            }
+            
+            .quiz-nav-btn, .quiz-submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
     
@@ -65,6 +270,7 @@
                         <li><a href="#library">[ GAME LIBRARY ]</a></li>
                         <li><a href="#setup">[ BATTLESTATION ]</a></li>
                         <li><a href="#philosophy">[ PHILOSOPHY ]</a></li>
+                        <li><a href="#quiz">[ CS2 QUIZ ]</a></li>
                         <li><a href="Rock.html" class="nav-rock">[ 🎸 ROCK PAGE ]</a></li>
                         <li><a href="index.html" class="nav-rock">[ HOMEPAGE ]</a></li>
                     </ul>
@@ -443,6 +649,49 @@
         
         <hr role="presentation" aria-hidden="true">
         
+        <!-- CS2 QUIZ SECTION -->
+        <section id="quiz" class="quiz-section">
+            <h2 class="section-title">&gt;&gt; CS2 KNOWLEDGE CHECK</h2>
+            <p class="section-desc">Test your Counter-Strike expertise!</p>
+            
+            <div class="quiz-container">
+                <div id="quiz-intro">
+                    <p>Think you know CS2? Take this quick quiz to find out!</p>
+                    <button id="start-quiz-btn" class="quiz-start-btn">START QUIZ</button>
+                </div>
+                
+                <div id="quiz-content" class="quiz-content" style="display: none;">
+                    <div class="quiz-progress">
+                        <span id="question-number">Question 1 of 5</span>
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-container" class="question-container">
+                        <!-- Questions will be loaded here dynamically -->
+                    </div>
+                    
+                    <div class="quiz-navigation">
+                        <button id="prev-btn" class="quiz-nav-btn" disabled>Previous</button>
+                        <button id="next-btn" class="quiz-nav-btn">Next</button>
+                        <button id="submit-btn" class="quiz-submit-btn" style="display: none;">Submit Quiz</button>
+                    </div>
+                </div>
+                
+                <div id="quiz-results" class="quiz-results" style="display: none;">
+                    <h3 class="results-title">Quiz Results</h3>
+                    <div class="score-display">
+                        <span id="score">0</span>/<span id="total">5</span>
+                    </div>
+                    <p id="result-message" class="result-message"></p>
+                    <button id="restart-quiz-btn" class="quiz-restart-btn">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+        
+        <hr role="presentation" aria-hidden="true">
+        
         <!-- PHILOSOPHY - CARD LAYOUT -->
         <section id="philosophy" class="philosophy-section">
             <h2 class="section-title">&gt;&gt; GAMING PHILOSOPHY</h2>
@@ -592,8 +841,202 @@
         if (skillSection) {
             skillObserver.observe(skillSection);
         }
+        
+        // CS2 Quiz Implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz data
+            const quizData = [
+                {
+                    question: "What is the maximum damage a headshot from an AWP can deal to a full-health opponent?",
+                    options: ["100", "115", "150", "Instant Kill"],
+                    correct: 1
+                },
+                {
+                    question: "Which map is known for having the most one-way angles?",
+                    options: ["Dust2", "Mirage", "Inferno", "Nuke"],
+                    correct: 3
+                },
+                {
+                    question: "How many rounds are needed to win a standard competitive match?",
+                    options: ["12", "16", "20", "24"],
+                    correct: 1
+                },
+                {
+                    question: "What does 'eco round' mean in CS2?",
+                    options: [
+                        "A round played without buying weapons",
+                        "A round with only pistols",
+                        "A round where teams save money",
+                        "Both A and C"
+                    ],
+                    correct: 3
+                },
+                {
+                    question: "Which weapon has the highest damage per shot in CS2?",
+                    options: ["AWP", "SCAR-20/G3SG1", "AK-47", "M4A4/M4A1-S"],
+                    correct: 0
+                }
+            ];
+            
+            // DOM elements
+            const startQuizBtn = document.getElementById('start-quiz-btn');
+            const quizIntro = document.getElementById('quiz-intro');
+            const quizContent = document.getElementById('quiz-content');
+            const quizResults = document.getElementById('quiz-results');
+            const questionContainer = document.getElementById('question-container');
+            const questionNumber = document.getElementById('question-number');
+            const progressFill = document.getElementById('progress-fill');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreDisplay = document.getElementById('score');
+            const totalDisplay = document.getElementById('total');
+            const resultMessage = document.getElementById('result-message');
+            
+            // Quiz state
+            let currentQuestion = 0;
+            let score = 0;
+            let userAnswers = Array(quizData.length).fill(null);
+            
+            // Start quiz
+            startQuizBtn.addEventListener('click', startQuiz);
+            
+            // Navigation
+            nextBtn.addEventListener('click', goToNextQuestion);
+            prevBtn.addEventListener('click', goToPrevQuestion);
+            submitBtn.addEventListener('click', showResults);
+            restartQuizBtn.addEventListener('click', restartQuiz);
+            
+            // Initialize quiz
+            function startQuiz() {
+                quizIntro.style.display = 'none';
+                quizContent.style.display = 'block';
+                currentQuestion = 0;
+                score = 0;
+                userAnswers = Array(quizData.length).fill(null);
+                showQuestion(currentQuestion);
+                updateProgress();
+                updateNavigationButtons();
+            }
+            
+            // Display current question
+            function showQuestion(index) {
+                // Add fade-out effect
+                questionContainer.style.opacity = '0';
+                questionContainer.style.transition = 'opacity 0.2s ease-out';
+                
+                setTimeout(() => {
+                    const question = quizData[index];
+                    let optionsHtml = '';
+                    
+                    question.options.forEach((option, i) => {
+                        const isChecked = userAnswers[index] === i ? 'checked' : '';
+                        optionsHtml += `
+                            <div class="quiz-option">
+                                <input type="radio" id="option${i}" name="answer" value="${i}" ${isChecked}>
+                                <label for="option${i}">${option}</label>
+                            </div>
+                        `;
+                    });
+                    
+                    questionContainer.innerHTML = `
+                        <h3 class="question-text">${question.question}</h3>
+                        <div class="quiz-options">
+                            ${optionsHtml}
+                        </div>
+                    `;
+                    
+                    // Add fade-in effect
+                    questionContainer.style.opacity = '0';
+                    questionContainer.style.transition = 'opacity 0.2s ease-in';
+                    setTimeout(() => {
+                        questionContainer.style.opacity = '1';
+                    }, 50);
+                    
+                    // Add event listeners to options
+                    setTimeout(() => {
+                        document.querySelectorAll('input[name="answer"]').forEach(option => {
+                            option.addEventListener('change', function() {
+                                userAnswers[currentQuestion] = parseInt(this.value);
+                            });
+                        });
+                    }, 50);
+                    
+                    questionNumber.textContent = `Question ${index + 1} of ${quizData.length}`;
+                }, 200);
+            }
+            
+            // Update progress bar
+            function updateProgress() {
+                const progress = ((currentQuestion + 1) / quizData.length) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+            
+            // Update navigation buttons
+            function updateNavigationButtons() {
+                prevBtn.disabled = currentQuestion === 0;
+                nextBtn.style.display = currentQuestion < quizData.length - 1 ? 'inline-block' : 'none';
+                submitBtn.style.display = currentQuestion === quizData.length - 1 ? 'inline-block' : 'none';
+            }
+            
+            // Go to next question
+            function goToNextQuestion() {
+                if (currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                    updateProgress();
+                    updateNavigationButtons();
+                }
+            }
+            
+            // Go to previous question
+            function goToPrevQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                    updateProgress();
+                    updateNavigationButtons();
+                }
+            }
+            
+            // Show results
+            function showResults() {
+                // Calculate score
+                score = 0;
+                userAnswers.forEach((answer, index) => {
+                    if (answer === quizData[index].correct) {
+                        score++;
+                    }
+                });
+                
+                // Display results
+                quizContent.style.display = 'none';
+                quizResults.style.display = 'block';
+                scoreDisplay.textContent = score;
+                totalDisplay.textContent = quizData.length;
+                
+                // Show personalized message
+                let message = '';
+                if (score === quizData.length) {
+                    message = "Perfect! You're a CS2 mastermind!";
+                } else if (score >= quizData.length * 0.8) {
+                    message = "Great job! You know your CS2!";
+                } else if (score >= quizData.length * 0.6) {
+                    message = "Not bad! Keep practicing those angles.";
+                } else {
+                    message = "Time to hit the practice server!";
+                }
+                
+                resultMessage.textContent = message;
+            }
+            
+            // Restart quiz
+            function restartQuiz() {
+                quizResults.style.display = 'none';
+                quizIntro.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
-
-
