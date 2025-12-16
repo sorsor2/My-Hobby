@@ -1,0 +1,1116 @@
+/* ============================================
+   SPLIT ATMOSPHERE - DUAL THEME STYLES
+   British MOD (Classic Rock) | CS2 (Gaming)
+   ============================================ */
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono&family=Bebas+Neue&display=swap');
+/* ============================================
+   CSS VARIABLES - DUAL THEME
+   ============================================ */
+:root {
+    /* ========== BRITISH MOD COLORS (Rock) ========== */
+    --mod-red: #E63946;
+    --mod-blue: #1D3557;
+    --mod-navy: #0D1B2A;
+    --mod-cream: #F1FAEE;
+    --mod-white: #FFFFFF;
+    --mod-black: #0A0A0A;
+    --mod-gold: #FFB703;
+    --mod-orange: #FB8500;
+    --mod-teal: #2A9D8F;
+    --mod-grey: #8D99AE;
+    
+    /* ========== CS2 COLORS (Gaming) ========== */
+    --cs-bg-primary: #0a0a0a;
+    --cs-bg-secondary: #111111;
+    --cs-bg-tertiary: #1a1a1a;
+    --cs-bg-card: #141414;
+    --cs-bg-hover: #1f1f1f;
+    --cs-text-primary: #e5e5e5;
+    --cs-text-secondary: #999999;
+    --cs-text-muted: #666666;
+    --cs-accent: #de9b35;
+    --cs-accent-secondary: #f5b942;
+    --cs-accent-glow: rgba(222, 155, 53, 0.3);
+    --cs-accent-dark: #a67620;
+    --cs-border: #2a2a2a;
+    --cs-border-accent: #3a3a3a;
+    
+    /* ========== FONTS ========== */
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Playfair Display', Georgia, serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-heading: 'Bebas Neue', 'Impact', sans-serif;
+    --font-main: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+    
+    /* ========== SPACING ========== */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 5rem;
+    
+    /* ========== TRANSITIONS ========== */
+    --transition-fast: all 0.2s ease;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-normal: all 0.25s ease;
+    
+    /* ========== SHADOWS ========== */
+    --shadow-mod: 8px 8px 0 var(--mod-red);
+    --shadow-cs-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-cs-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+    --shadow-cs-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+    --shadow-cs-glow: 0 0 20px var(--cs-accent-glow);
+}
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    font-size: 16px;
+}
+body {
+    font-family: var(--font-main);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Split background - MOD navy left, CS2 dark right */
+    background: linear-gradient(90deg, 
+        var(--mod-navy) 0%, 
+        var(--mod-navy) 50%, 
+        var(--cs-bg-primary) 50%, 
+        var(--cs-bg-primary) 100%
+    );
+}
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+a {
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+a:focus {
+    outline: 3px solid var(--mod-gold);
+    outline-offset: 3px;
+}
+/* ============================================
+   NAVIGATION - Split Style
+   ============================================ */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* Split background */
+    background: linear-gradient(90deg, 
+        var(--mod-navy) 0%, 
+        var(--mod-navy) 50%, 
+        var(--cs-bg-secondary) 50%, 
+        var(--cs-bg-secondary) 100%
+    );
+    /* Gradient border bottom */
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--mod-red) 50%, var(--cs-accent) 50%) 1;
+}
+.logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mod-white);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+}
+/* If logo has spans for split coloring */
+.logo span:first-child {
+    color: var(--mod-red);
+}
+.logo span:last-child {
+    color: var(--cs-accent);
+}
+/* Logo underline for single text logo */
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mod-red), var(--cs-accent));
+}
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+}
+.nav-links a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: var(--mod-white);
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    border: 2px solid transparent;
+    transition: var(--transition-smooth);
+}
+.nav-links a:hover {
+    transform: translateY(-2px);
+}
+.nav-links a.active {
+    border-color: var(--mod-white);
+}
+/* Rock-themed nav links - MOD Style */
+.nav-links a.rock-link,
+.nav-links a[href*="Rock"] {
+    border-color: var(--mod-red);
+}
+.nav-links a.rock-link:hover,
+.nav-links a[href*="Rock"]:hover {
+    background: var(--mod-red);
+    color: var(--mod-white);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+/* Gaming-themed nav links - CS2 Style */
+.nav-links a.game-link,
+.nav-links a[href*="Game"] {
+    border-color: var(--cs-accent);
+    font-family: var(--font-mono);
+}
+.nav-links a.game-link:hover,
+.nav-links a[href*="Game"]:hover {
+    background: var(--cs-accent);
+    color: var(--cs-bg-primary);
+    box-shadow: 0 4px 15px var(--cs-accent-glow);
+}
+/* ============================================
+   HERO SECTION - Split Design
+   ============================================ */
+.hero {
+    text-align: center;
+    padding: var(--space-xxl) 5%;
+    position: relative;
+    overflow: hidden;
+    /* Split background */
+    background: linear-gradient(90deg, 
+        var(--mod-navy) 0%, 
+        var(--mod-navy) 50%, 
+        var(--cs-bg-primary) 50%, 
+        var(--cs-bg-primary) 100%
+    );
+    border-bottom: 6px solid;
+    border-image: linear-gradient(90deg, var(--mod-gold) 50%, var(--cs-accent) 50%) 1;
+}
+/* MOD Target/Bullseye Background (Left Side) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: 
+        radial-gradient(circle, 
+            var(--mod-red) 0%, var(--mod-red) 15%, 
+            var(--mod-white) 15%, var(--mod-white) 30%,
+            var(--mod-red) 30%, var(--mod-red) 45%,
+            transparent 45%
+        );
+    opacity: 0.1;
+    animation: targetPulse 8s ease-in-out infinite;
+    pointer-events: none;
+}
+/* CS2 Glow Background (Right Side) */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    transform: translate(50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(ellipse, var(--cs-accent-glow) 0%, transparent 70%);
+    opacity: 0.3;
+    animation: csGlow 4s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+@keyframes targetPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 0.1; 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1); 
+        opacity: 0.15; 
+    }
+}
+@keyframes csGlow {
+    0% { opacity: 0.2; }
+    100% { opacity: 0.4; }
+}
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--mod-white);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+.hero h1::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--mod-red), var(--cs-accent));
+}
+/* Colored text spans in hero */
+.hero h1 .rock-text {
+    color: var(--mod-red);
+}
+.hero h1 .game-text {
+    color: var(--cs-accent);
+}
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--mod-cream);
+    font-style: italic;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-body);
+    opacity: 0.9;
+}
+/* ============================================
+   HOBBIES SECTION - Split Cards Container
+   ============================================ */
+.hobbies-container {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    position: relative;
+    background: linear-gradient(90deg, 
+        var(--mod-navy) 0%, 
+        var(--mod-navy) 50%, 
+        var(--cs-bg-primary) 50%, 
+        var(--cs-bg-primary) 100%
+    );
+}
+/* Center Divider Line */
+.hobbies-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--mod-red), var(--cs-accent));
+    z-index: 10;
+}
+.hobby-card {
+    width: 50%;
+    min-height: 500px;
+    padding: 4rem 5%;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    position: relative;
+    cursor: pointer;
+}
+/* ============================================
+   ROCK CARD - British MOD Style
+   ============================================ */
+.hobby-card.rock {
+    background: var(--mod-navy);
+    font-family: var(--font-body);
+}
+/* MOD Grid Pattern Overlay */
+.hobby-card.rock::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 50px,
+            rgba(230, 57, 70, 0.03) 50px,
+            rgba(230, 57, 70, 0.03) 51px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 50px,
+            rgba(230, 57, 70, 0.03) 50px,
+            rgba(230, 57, 70, 0.03) 51px
+        );
+    pointer-events: none;
+}
+/* Corner decoration */
+.hobby-card.rock::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--mod-gold);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    opacity: 0.8;
+}
+/* Vinyl Record Icon - MOD Style */
+.hobby-card.rock .hobby-icon {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 2rem;
+    border-radius: 50%;
+    border: 6px solid var(--mod-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--mod-black);
+    transition: var(--transition-smooth);
+}
+/* Vinyl center hole */
+.hobby-card.rock .hobby-icon::before {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: var(--mod-red);
+    border-radius: 50%;
+    border: 3px solid var(--mod-white);
+    z-index: 2;
+}
+/* Vinyl grooves */
+.hobby-card.rock .hobby-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        circle at center,
+        transparent 0px,
+        transparent 8px,
+        rgba(230, 57, 70, 0.2) 8px,
+        rgba(230, 57, 70, 0.2) 10px
+    );
+}
+.hobby-card.rock .hobby-icon i {
+    font-size: 3rem;
+    color: var(--mod-red);
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+/* Rock Card Hover Effects */
+.hobby-card.rock:hover {
+    transform: translateY(-5px) rotate(-1deg);
+}
+.hobby-card.rock:hover .hobby-icon {
+    transform: rotate(360deg);
+    box-shadow: 0 0 40px rgba(230, 57, 70, 0.5);
+}
+.hobby-card.rock:hover .hobby-icon i {
+    color: var(--mod-gold);
+}
+.hobby-card.rock h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--mod-white);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+}
+.hobby-card.rock h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: var(--mod-red);
+}
+.hobby-card.rock p {
+    color: var(--mod-cream);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-style: italic;
+    max-width: 400px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.85;
+}
+.hobby-card.rock .hobby-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--mod-red);
+    color: var(--mod-white);
+    border: 3px solid var(--mod-white);
+    transition: var(--transition-smooth);
+    position: relative;
+    z-index: 1;
+}
+.hobby-card.rock:hover .hobby-btn {
+    background: var(--mod-white);
+    color: var(--mod-red);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.4);
+}
+/* ============================================
+   GAMING CARD - CS2 Style
+   ============================================ */
+.hobby-card.gaming {
+    background: var(--cs-bg-primary);
+    font-family: var(--font-main);
+}
+/* CS2 Scanline + Glow Overlay */
+.hobby-card.gaming::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at top right, rgba(222, 155, 53, 0.05) 0%, transparent 50%),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px
+        );
+    pointer-events: none;
+}
+/* Tech Icon Container - CS2 Style */
+.hobby-card.gaming .hobby-icon {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 2rem;
+    background: var(--cs-bg-card);
+    border: 2px solid var(--cs-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: var(--transition-normal);
+}
+/* Outer glow effect */
+.hobby-card.gaming .hobby-icon::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--cs-accent), transparent, var(--cs-accent));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+/* Top accent bar */
+.hobby-card.gaming .hobby-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cs-accent), var(--cs-accent-secondary));
+}
+.hobby-card.gaming .hobby-icon i {
+    font-size: 3rem;
+    color: var(--cs-accent);
+    z-index: 1;
+    transition: var(--transition-fast);
+}
+/* Gaming Card Hover Effects */
+.hobby-card.gaming:hover {
+    transform: translateY(-5px);
+}
+.hobby-card.gaming:hover .hobby-icon {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px var(--cs-accent-glow);
+}
+.hobby-card.gaming:hover .hobby-icon::before {
+    opacity: 0.5;
+}
+.hobby-card.gaming:hover .hobby-icon i {
+    color: var(--cs-accent-secondary);
+    text-shadow: 0 0 20px var(--cs-accent-glow);
+}
+.hobby-card.gaming h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--cs-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    position: relative;
+}
+/* Blinking cursor effect */
+.hobby-card.gaming h2::after {
+    content: '_';
+    color: var(--cs-accent);
+    animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.hobby-card.gaming p {
+    color: var(--cs-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    position: relative;
+    z-index: 1;
+}
+.hobby-card.gaming .hobby-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: transparent;
+    color: var(--cs-accent);
+    border: 2px solid var(--cs-accent);
+    transition: var(--transition-fast);
+    position: relative;
+    z-index: 1;
+}
+.hobby-card.gaming:hover .hobby-btn {
+    background: var(--cs-accent);
+    color: var(--cs-bg-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--cs-accent-glow);
+}
+/* ============================================
+   FEATURES SECTION - Split Style
+   ============================================ */
+.features {
+    padding: var(--space-xxl) 5%;
+    text-align: center;
+    position: relative;
+    /* Split background */
+    background: linear-gradient(90deg, 
+        var(--mod-blue) 0%, 
+        var(--mod-blue) 50%, 
+        var(--cs-bg-secondary) 50%, 
+        var(--cs-bg-secondary) 100%
+    );
+    border-top: 6px solid;
+    border-image: linear-gradient(90deg, var(--mod-red) 50%, var(--cs-accent) 50%) 1;
+    border-bottom: 6px solid;
+}
+/* Center Divider */
+.features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--mod-red), var(--cs-accent));
+    z-index: 10;
+}
+/* Corner decoration (MOD style) */
+.features::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: var(--mod-red);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    opacity: 0.2;
+}
+.features h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--mod-white);
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.features h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mod-red), var(--cs-accent));
+}
+/* Colored text spans */
+.features h2 .rock-word {
+    color: var(--mod-gold);
+}
+.features h2 .game-word {
+    color: var(--cs-accent);
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.feature-item {
+    padding: 3rem 2rem;
+    transition: var(--transition-smooth);
+    text-align: left;
+}
+/* ========== Rock Feature - MOD Style ========== */
+.feature-item.rock-feature,
+.feature-item:first-child {
+    background: rgba(29, 53, 87, 0.8);
+    border: 3px solid var(--mod-white);
+    border-left: 6px solid var(--mod-red);
+    margin: 1rem;
+}
+.feature-item.rock-feature:hover,
+.feature-item:first-child:hover {
+    transform: translateY(-5px) rotate(-1deg);
+    box-shadow: var(--shadow-mod);
+}
+.feature-item.rock-feature i,
+.feature-item:first-child i {
+    font-size: 2.5rem;
+    color: var(--mod-red);
+    margin-bottom: 1rem;
+    display: block;
+}
+.feature-item.rock-feature h3,
+.feature-item:first-child h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mod-white);
+}
+.feature-item.rock-feature p,
+.feature-item:first-child p {
+    color: var(--mod-grey);
+    font-family: var(--font-body);
+    font-style: italic;
+    line-height: 1.7;
+}
+/* ========== Gaming Feature - CS2 Style ========== */
+.feature-item.game-feature,
+.feature-item:nth-child(2) {
+    background: var(--cs-bg-card);
+    border: 1px solid var(--cs-border);
+    border-left: 4px solid var(--cs-accent);
+    margin: 1rem;
+}
+.feature-item.game-feature:hover,
+.feature-item:nth-child(2):hover {
+    transform: translateY(-5px);
+    border-color: var(--cs-accent);
+    box-shadow: var(--shadow-cs-lg), var(--shadow-cs-glow);
+}
+.feature-item.game-feature i,
+.feature-item:nth-child(2) i {
+    font-size: 2.5rem;
+    color: var(--cs-accent);
+    margin-bottom: 1rem;
+    display: block;
+}
+.feature-item.game-feature h3,
+.feature-item:nth-child(2) h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--cs-text-primary);
+}
+.feature-item.game-feature h3::after,
+.feature-item:nth-child(2) h3::after {
+    content: '_';
+    color: var(--cs-accent);
+    animation: blink 1s steps(1) infinite;
+}
+.feature-item.game-feature p,
+.feature-item:nth-child(2) p {
+    color: var(--cs-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+/* ============================================
+   FOOTER - Split Style
+   ============================================ */
+footer {
+    padding: 4rem 5% 2rem;
+    text-align: center;
+    position: relative;
+    /* Split background */
+    background: linear-gradient(90deg, 
+        var(--mod-navy) 0%, 
+        var(--mod-navy) 50%, 
+        var(--cs-bg-secondary) 50%, 
+        var(--cs-bg-secondary) 100%
+    );
+    border-top: 4px solid;
+    border-image: linear-gradient(90deg, var(--mod-red) 50%, var(--cs-accent) 50%) 1;
+}
+/* MOD Target decoration (left) */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: 
+        radial-gradient(circle, 
+            var(--mod-red) 0%, var(--mod-red) 30%, 
+            var(--mod-white) 30%, var(--mod-white) 50%,
+            var(--mod-red) 50%
+        );
+    border-radius: 50%;
+    margin-top: -40px;
+}
+/* CS2 Badge decoration (right) */
+footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 25%;
+    transform: translateX(50%);
+    width: 60px;
+    height: 60px;
+    background: var(--cs-bg-card);
+    border: 3px solid var(--cs-accent);
+    margin-top: -30px;
+}
+footer p {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mod-grey);
+    margin-top: 1.5rem;
+}
+.social-links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+/* Rock-themed social icons - MOD Style */
+.social-links a.rock-social {
+    background: transparent;
+    border: 3px solid var(--mod-red);
+    color: var(--mod-white);
+}
+.social-links a.rock-social:hover {
+    background: var(--mod-red);
+    transform: translateY(-3px) rotate(-5deg);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+}
+/* Gaming-themed social icons - CS2 Style */
+.social-links a.game-social {
+    background: var(--cs-bg-card);
+    border: 2px solid var(--cs-accent);
+    color: var(--cs-accent);
+}
+.social-links a.game-social:hover {
+    background: var(--cs-accent);
+    color: var(--cs-bg-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--cs-accent-glow);
+}
+/* Default social styling (no class) */
+.social-links a:not(.rock-social):not(.game-social) {
+    background: transparent;
+    border: 3px solid var(--mod-white);
+    color: var(--mod-white);
+}
+.social-links a:not(.rock-social):not(.game-social):hover {
+    background: var(--mod-red);
+    border-color: var(--mod-red);
+    transform: translateY(-3px) rotate(-5deg);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+}
+/* ============================================
+   HR SEPARATOR - Dual Style
+   ============================================ */
+hr {
+    border: none;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--mod-red) 0%, var(--mod-red) 50%, 
+        var(--cs-accent) 50%, var(--cs-accent) 100%
+    );
+    margin: var(--space-xl) 0;
+}
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 900px) {
+    .hobby-card {
+        width: 100%;
+    }
+    
+    /* Hide center divider on mobile */
+    .hobbies-container::before {
+        display: none;
+    }
+    
+    .hobby-card.rock {
+        border-bottom: 4px solid var(--mod-red);
+    }
+    
+    .hobby-card.gaming {
+        border-top: 4px solid var(--cs-accent);
+    }
+    
+    .features::before {
+        display: none;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Single background on mobile */
+    .features {
+        background: var(--mod-blue);
+    }
+    
+    .feature-item.game-feature,
+    .feature-item:nth-child(2) {
+        background: rgba(20, 20, 20, 0.95);
+    }
+    
+    footer {
+        background: var(--mod-navy);
+    }
+    
+    footer::after {
+        display: none;
+    }
+    
+    footer::before {
+        left: 50%;
+    }
+    
+    body,
+    .hobbies-container,
+    .hero {
+        background: var(--mod-navy);
+    }
+}
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 5%;
+        background: var(--mod-navy);
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links a {
+        padding: 0.4rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .hero {
+        padding: var(--space-xl) 5%;
+    }
+    
+    .hero::before,
+    .hero::after {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .hobby-card {
+        min-height: 450px;
+        padding: 3rem 5%;
+    }
+    
+    .hobby-card .hobby-icon {
+        width: 110px !important;
+        height: 110px !important;
+    }
+    
+    .hobby-card .hobby-icon i {
+        font-size: 2.5rem !important;
+    }
+    
+    .hobby-card h2 {
+        font-size: 2rem !important;
+    }
+    
+    .features {
+        padding: var(--space-xl) 5%;
+    }
+}
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .nav-links {
+        gap: var(--space-xs);
+    }
+    
+    .nav-links a {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.7rem;
+        border-width: 2px;
+    }
+    
+    .hobby-card .hobby-icon {
+        width: 90px !important;
+        height: 90px !important;
+    }
+    
+    .hobby-card .hobby-icon i {
+        font-size: 2rem !important;
+    }
+    
+    .hobby-card h2 {
+        font-size: 1.6rem !important;
+    }
+    
+    .hobby-card.rock::after {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .hobby-btn {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+    }
+    
+    .social-links a {
+        width: 44px;
+        height: 44px;
+    }
+}
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+    :root {
+        --mod-red: #FF0000;
+        --cs-accent: #FFB000;
+        --mod-white: #FFFFFF;
+        --cs-text-primary: #FFFFFF;
+    }
+    
+    a:focus, button:focus {
+        outline: 4px solid #FFFFFF;
+    }
+}
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    nav,
+    .hobby-icon,
+    .social-links,
+    footer::before,
+    footer::after {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .hobby-card,
+    .feature-item {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+}

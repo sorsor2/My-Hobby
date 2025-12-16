@@ -1,0 +1,1086 @@
+/* =============================================
+   COUNTER-STRIKE 2 INSPIRED GAMING STYLESHEET
+   ============================================= */
+/* CSS Variables - CS2 Color Palette */
+:root {
+    /* Ultra Dark Theme (Default) - CS2 Main Menu Style */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-tertiary: #1a1a1a;
+    --bg-card: #141414;
+    --bg-hover: #1f1f1f;
+    
+    --text-primary: #e5e5e5;
+    --text-secondary: #999999;
+    --text-muted: #666666;
+    
+    /* CS2 Orange/Amber Accent */
+    --accent-primary: #de9b35;
+    --accent-secondary: #f5b942;
+    --accent-glow: rgba(222, 155, 53, 0.3);
+    --accent-dark: #a67620;
+    
+    /* CS2 UI Colors */
+    --cs-orange: #de9b35;
+    --cs-yellow: #f5c842;
+    --cs-red: #c44b4b;
+    --cs-green: #5cb85c;
+    --cs-blue: #4a90d9;
+    
+    --border-color: #2a2a2a;
+    --border-accent: #3a3a3a;
+    
+    /* Shadows and Effects */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 20px var(--accent-glow);
+    
+    /* Typography */
+    --font-main: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+    --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+    --font-heading: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.4s ease;
+}
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #222222;
+    --bg-card: #1e1e1e;
+    --bg-hover: #2a2a2a;
+    --border-color: #333333;
+}
+/* Light Theme */
+[data-theme="light"] {
+    --bg-primary: #f0f0f0;
+    --bg-secondary: #e5e5e5;
+    --bg-tertiary: #d9d9d9;
+    --bg-card: #ffffff;
+    --bg-hover: #f5f5f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #444444;
+    --text-muted: #777777;
+    --border-color: #cccccc;
+    --accent-primary: #c78520;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+/* =============================================
+   RESET & BASE STYLES
+   ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    /* Subtle noise texture overlay */
+    background-image: 
+        radial-gradient(ellipse at top, rgba(222, 155, 53, 0.03) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background-attachment: fixed;
+}
+/* Accessibility - Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
+    color: #000;
+    padding: 0.75rem 1.5rem;
+    z-index: 10000;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+}
+.skip-link:focus {
+    top: 0;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+/* =============================================
+   HEADER - CS2 STYLE
+   ============================================= */
+.gaming-header {
+    position: relative;
+    min-height: 350px;
+    background: 
+        linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 20, 20, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80') center/cover no-repeat;
+    border-bottom: 3px solid var(--accent-primary);
+    overflow: hidden;
+}
+.gaming-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px
+        );
+    pointer-events: none;
+}
+.gaming-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to top, var(--bg-primary), transparent);
+}
+.header-overlay {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.header-left h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 30px var(--accent-glow);
+}
+.header-left h1 .subtitle-inline {
+    color: var(--accent-primary);
+    font-size: 0.6em;
+    display: block;
+    letter-spacing: 8px;
+}
+.tagline {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    opacity: 0.9;
+    animation: blink-cursor 1s steps(1) infinite;
+}
+@keyframes blink-cursor {
+    50% { opacity: 0.5; }
+}
+/* Quick Stats - CS2 Scoreboard Style */
+.quick-stats {
+    display: flex;
+    gap: 1.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1.25rem 2rem;
+    border: 1px solid var(--border-accent);
+    border-left: 3px solid var(--accent-primary);
+    backdrop-filter: blur(10px);
+}
+.quick-stat {
+    text-align: center;
+    padding: 0 1rem;
+    border-right: 1px solid var(--border-color);
+}
+.quick-stat:last-child {
+    border-right: none;
+}
+.stat-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--accent-primary);
+    line-height: 1;
+}
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+/* Navigation - CS2 Menu Style */
+.gaming-nav {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-color);
+    padding: 0;
+    backdrop-filter: blur(10px);
+}
+.gaming-nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.gaming-nav li {
+    border-right: 1px solid var(--border-color);
+}
+.gaming-nav li:last-child {
+    border-right: none;
+}
+.gaming-nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+.gaming-nav a:hover,
+.gaming-nav a:focus {
+    color: var(--accent-primary);
+    background: rgba(222, 155, 53, 0.1);
+}
+.gaming-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: all var(--transition-normal);
+    transform: translateX(-50%);
+}
+.gaming-nav a:hover::after {
+    width: 80%;
+}
+.nav-rock {
+    color: var(--cs-yellow) !important;
+}
+/* =============================================
+   MAIN CONTENT
+   ============================================= */
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+/* Section Styling */
+section {
+    padding: 4rem 0;
+}
+.section-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '_';
+    animation: blink-cursor 1s steps(1) infinite;
+}
+.section-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+}
+/* Horizontal Rules - CS2 Style */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-accent), var(--accent-primary), var(--border-accent), transparent);
+    margin: 0;
+}
+/* =============================================
+   INTRO BANNER
+   ============================================= */
+.intro-banner {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-primary);
+    padding: 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+.intro-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(222, 155, 53, 0.05));
+}
+.banner-title {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+.banner-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 800px;
+}
+/* =============================================
+   CORE GAMES - CARD GRID
+   ============================================= */
+.core-games-section {
+    padding-top: 3rem;
+}
+.core-games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+.core-game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+.core-game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-normal);
+}
+.core-game-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-4px);
+}
+.core-game-card:hover::before {
+    transform: scaleX(1);
+}
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+.game-icon-large {
+    width: 70px;
+    height: 70px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.game-icon-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.game-title-block h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+.game-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    background: rgba(222, 155, 53, 0.15);
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 1px;
+}
+.game-body {
+    padding: 1.25rem;
+}
+.game-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+.game-stats-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.stat-inline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.stat-inline strong {
+    color: var(--text-secondary);
+}
+.game-footer {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+.steam-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-primary);
+    transition: all var(--transition-fast);
+}
+.steam-link:hover {
+    background: var(--accent-primary);
+    color: #000;
+}
+.steam-icon {
+    font-size: 1.1rem;
+}
+.steam-icon img {
+    width: 16px;
+    height: 16px;
+}
+/* =============================================
+   GAME LIBRARY - GRID
+   ============================================= */
+.game-library {
+    background: var(--bg-secondary);
+    margin: 0 -1.5rem;
+    padding: 4rem 1.5rem;
+}
+.library-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.library-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+.library-item:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+.lib-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+.library-item h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+.library-item p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+.lib-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.lib-link:hover {
+    text-decoration: underline;
+}
+/* =============================================
+   SKILL BARS - CS2 STYLE
+   ============================================= */
+.genre-section {
+    padding: 4rem 0;
+}
+.skill-bars {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.skill-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+}
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.skill-name {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.skill-percent {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+.skill-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+.skill-bar {
+    height: 8px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent-primary), var(--accent-secondary));
+    transition: width 1s ease-out;
+    position: relative;
+}
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+}
+/* =============================================
+   BATTLESTATION SETUP
+   ============================================= */
+.battlestation-section {
+    padding: 4rem 0;
+}
+.battlestation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.setup-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+.setup-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg-tertiary);
+    border-bottom: 2px solid var(--accent-primary);
+}
+.setup-icon {
+    font-size: 1.5rem;
+}
+.setup-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.setup-list {
+    list-style: none;
+    padding: 1.25rem;
+}
+.setup-list li {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.setup-list li:last-child {
+    border-bottom: none;
+}
+/* =============================================
+   LEGENDARY MOMENTS - TIMELINE
+   ============================================= */
+.moments-section {
+    padding: 4rem 0;
+}
+.moments-timeline {
+    position: relative;
+    padding-left: 3rem;
+    border-left: 2px solid var(--border-accent);
+}
+.moment-block {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+}
+.moment-block:last-child {
+    margin-bottom: 0;
+}
+.moment-marker {
+    position: absolute;
+    left: -3.65rem;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+.moment-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent-primary);
+}
+.moment-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+.moment-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+/* =============================================
+   PHILOSOPHY SECTION
+   ============================================= */
+.philosophy-section {
+    padding: 4rem 0;
+}
+.philosophy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+.phil-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    position: relative;
+    transition: all var(--transition-fast);
+}
+.phil-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-primary);
+}
+.phil-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateX(4px);
+}
+.phil-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+.phil-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.philosophy-quote {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+}
+.philosophy-quote::before,
+.philosophy-quote::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--accent-primary);
+    opacity: 0.3;
+}
+.philosophy-quote::before {
+    top: 15px;
+    left: 15px;
+    border-right: none;
+    border-bottom: none;
+}
+.philosophy-quote::after {
+    bottom: 15px;
+    right: 15px;
+    border-left: none;
+    border-top: none;
+}
+.philosophy-quote blockquote {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+}
+.philosophy-quote cite {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    font-style: normal;
+}
+/* =============================================
+   FINAL SECTION
+   ============================================= */
+.final-section {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+}
+.final-section h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 30px var(--accent-glow);
+}
+.final-section p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    line-height: 1.7;
+}
+.final-message {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    margin-top: 2rem !important;
+    letter-spacing: 4px;
+}
+/* =============================================
+   BACK TO TOP BUTTON
+   ============================================= */
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#back-to-top:hover {
+    background: var(--accent-primary);
+    color: #000;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+}
+#back-to-top[hidden] {
+    display: none;
+}
+/* =============================================
+   THEME TOGGLE
+   ============================================= */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+.theme-toggle label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+#theme-selector {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+#theme-selector:hover,
+#theme-selector:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+}
+/* =============================================
+   FOOTER
+   ============================================= */
+footer {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent-primary);
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.footer-content > p {
+    margin-bottom: 0.75rem;
+}
+.footer-content strong {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    letter-spacing: 2px;
+}
+.footer-content small {
+    color: var(--text-muted);
+}
+.footer-links {
+    margin: 2rem 0;
+}
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+.footer-links a:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+.copyright {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+@media (max-width: 900px) {
+    .header-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .quick-stats {
+        justify-content: center;
+    }
+    
+    .gaming-nav ul {
+        flex-direction: column;
+    }
+    
+    .gaming-nav li {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .gaming-nav li:last-child {
+        border-bottom: none;
+    }
+    
+    .moments-timeline {
+        padding-left: 2rem;
+    }
+    
+    .moment-marker {
+        left: -2.65rem;
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
+    }
+}
+@media (max-width: 600px) {
+    .gaming-header {
+        min-height: 280px;
+    }
+    
+    .header-overlay {
+        padding: 1.5rem 1rem;
+    }
+    
+    .quick-stats {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .quick-stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+    }
+    
+    .quick-stat:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .game-stats-inline {
+        grid-template-columns: 1fr;
+    }
+    
+    .intro-banner {
+        padding: 1.5rem;
+    }
+    
+    section {
+        padding: 2.5rem 0;
+    }
+    
+    .philosophy-quote {
+        padding: 2rem 1.5rem;
+    }
+    
+    .philosophy-quote blockquote {
+        font-size: 1rem;
+    }
+    
+    #back-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+/* =============================================
+   ANIMATIONS & EFFECTS
+   ============================================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.core-game-card,
+.library-item,
+.setup-block,
+.phil-card,
+.moment-block {
+    animation: fadeInUp 0.5s ease forwards;
+}
+/* Stagger animations */
+.core-game-card:nth-child(1) { animation-delay: 0.1s; }
+.core-game-card:nth-child(2) { animation-delay: 0.2s; }
+.core-game-card:nth-child(3) { animation-delay: 0.3s; }
+.core-game-card:nth-child(4) { animation-delay: 0.4s; }
+/* Focus states for accessibility */
+a:focus,
+button:focus,
+select:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+/* Print styles */
+@media print {
+    .gaming-header,
+    .theme-toggle,
+    #back-to-top,
+    .gaming-nav {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
